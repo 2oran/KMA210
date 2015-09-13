@@ -39,17 +39,17 @@ void command_mode()
       unsigned char i;
       unsigned char j;
 
-      
-      
+
+
   for(j=0;j<3;j++)
   {
       unsigned char result;
-      data_hex = array[j]; 
+      data_hex = array[j];
       serial_8( data_hex);
-          
+
   }
-      
-     
+
+
 }
 
 //*************************************************************************************************************************************
@@ -63,24 +63,24 @@ void start (void)
   delayMicroseconds(10);
  // digitalWrite(10,HIGH);
   //digitalWrite(10,LOW);
- 
+
 }
 //*************************************************************************************************************************************
 // Stop condition
 //*************************************************************************************************************************************
 void stop (void)
 {
- 
+
   digitalWrite(9,HIGH);   // ovo je stop uslov (10uS), po dokumentaciji je 5uS
   delayMicroseconds(10);
- 
+
 }
 //*************************************************************************************************************************************
 // Send command
 //*************************************************************************************************************************************
 unsigned char send_command(unsigned char)
 {
-  
+
 }
 
 //*************************************************************************************************************************************
@@ -88,7 +88,7 @@ unsigned char send_command(unsigned char)
 //*************************************************************************************************************************************
 void read_kma210()
 {
-  
+
     unsigned char i;
     // unsigned int result = 0;;
     unsigned int serial_bit;
@@ -102,10 +102,10 @@ void read_kma210()
     serial_bit  = digitalRead(9) != 0;
     //digitalWrite(10,HIGH);
     delayMicroseconds(38);
-    
+
     result |= serial_bit << i ;
    }
-      
+
 }
 
 //************************************************************************************************************************************
@@ -118,7 +118,7 @@ unsigned char serial_8(unsigned char data_hex)
    for(i=0;i<8;i++)
       {
         result = data_hex & 0x80;
-            
+
         if(result == 0x80)
         {
             digitalWrite(9,HIGH);
@@ -138,7 +138,7 @@ unsigned char serial_8(unsigned char data_hex)
             data_hex <<= 1;
       }
 }
-  
+
 
 //************************************************************************************************************************************
 //  Serial send 16 bits
@@ -147,11 +147,11 @@ unsigned char serial_16(unsigned int data_hex)
 {
   char i;
   unsigned char result;
-  
+
    for(i=0;i<16;i++)
       {
         result = data_hex & 0x8000;
-            
+
         if(result == 0x8000)
         {
             digitalWrite(9,HIGH);
@@ -181,7 +181,7 @@ void handover (void)
   digitalWrite(9,LOW);
   delayMicroseconds(30);
   pinMode(9,INPUT);
-  delayMicroseconds(22);  
+  delayMicroseconds(22);
 }
 //************************************************************************************************************************************
 // Takeover
@@ -192,7 +192,7 @@ void takeover (void)
   pinMode(9,OUTPUT);
   digitalWrite(9,LOW);
   delayMicroseconds(30);
-  
+
 }
 
 //************************************************************************************************************************************
@@ -200,14 +200,11 @@ void takeover (void)
 //************************************************************************************************************************************
 void pulse()
 {
- 
+
   digitalWrite(9,HIGH);       // OVO JE SAMO TEST!!!!!!
   delayMicroseconds(65);
   digitalWrite(9,LOW);
   delayMicroseconds(23);
-  
-}
 
-  
-  
+}
 
