@@ -6,7 +6,7 @@ void setup()
   pinMode(9,OUTPUT);
   pinMode(10,OUTPUT);
   pinMode(11,OUTPUT);
- // Serial.begin(9600);
+  Serial.begin(9600);
   delay(20);      // Enter command mode (30mS)
   start();
   command_mode();
@@ -26,8 +26,7 @@ void loop()
 
   takeover();
   stop();
-  Serial.print(result,HEX);
-
+  Serial.print(result, HEX);
 }
 //******************************************************************************************************************************************
 // Komandni mod, posle power on-a
