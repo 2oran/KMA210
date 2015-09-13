@@ -1,3 +1,22 @@
+#include <Arduino.h>
+
+void setup();
+void loop();
+void command_mode();
+void start (void);
+void stop (void);
+unsigned char send_command(unsigned char);
+void read_kma210();
+unsigned char serial_8(unsigned char data_hex);
+unsigned char serial_16(unsigned int data_hex);
+void handover (void);
+void takeover (void);
+void pulse();
+#line 1 "src/sketch.ino"
+#define T_ZERO 80*0.25
+#define T_ONE 80*0.75
+#define T_PERIOD 80
+
 //******************************************************************************************************************************************
 // Setup
 //******************************************************************************************************************************************
@@ -121,17 +140,17 @@ unsigned char serial_8(unsigned char data_hex)
         if(result == 0x80)
         {
             digitalWrite(9,HIGH);
-            delayMicroseconds(60);
+            delayMicroseconds(T_ONE);
             digitalWrite(9,LOW);
-            delayMicroseconds(25);
+            delayMicroseconds(T_PERIOD - T_ONE);
             // Serial.print('1');
         }
         else
         {
             digitalWrite(9,HIGH);
-            delayMicroseconds(22);
+            delayMicroseconds(T_ZERO);
             digitalWrite(9,LOW);
-            delayMicroseconds(65);
+            delayMicroseconds(T_PERIOD - T_ZERO);
             //Serial.print('0');
         }
             data_hex <<= 1;
