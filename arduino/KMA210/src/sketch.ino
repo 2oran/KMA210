@@ -1,6 +1,6 @@
-#define T_ZERO 80*0.25
-#define T_ONE 80*0.75
-#define T_PERIOD 80
+#define T_PERIOD 70
+#define T_ZERO (int)(T_PERIOD*0.25)
+#define T_ONE (int)(T_PERIOD*0.75)
 
 //******************************************************************************************************************************************
 // Setup
@@ -10,11 +10,17 @@ void setup()
   pinMode(9,OUTPUT);
   pinMode(10,OUTPUT);
   pinMode(11,OUTPUT);
-  Serial.begin(9600);
-  delay(20);      // Enter command mode (30mS)
+
+  digitalWrite(11, HIGH);
+
+  /*Serial.begin(9600);*/
+  delay(5);      // Enter command mode (30mS)
+
   start();
   command_mode();
   stop();
+  digitalWrite(11, LOW);
+  delay(30);
 }
 int result = 0; //OVO JE GLOBALNA VARIJABLA!!!!!!!????
 //******************************************************************************************************************************************
@@ -100,8 +106,8 @@ void read_kma210()
    {
 
     delayMicroseconds(39);
-    digitalWrite(11,HIGH);
-    digitalWrite(11,LOW);
+    /*digitalWrite(11,HIGH);*/
+    /*digitalWrite(11,LOW);*/
     serial_bit  = digitalRead(9) != 0;
     //digitalWrite(10,HIGH);
     delayMicroseconds(38);
